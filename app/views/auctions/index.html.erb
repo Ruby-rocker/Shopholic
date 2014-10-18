@@ -1,0 +1,33 @@
+<div style="padding-bottom: 1300px;"><center><h1>Listing of Auctions</h1></center>
+
+<table border="1" width="100%">
+  <tr>
+    <th>User</th>
+    <th>Name</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Reserved price</th>
+    <th></th>
+    <% if current_user.role == false %>
+    <th></th>
+    <th></th> <% end %>
+  </tr>
+
+<% @auctions.each do |auction| %>
+  <tr>
+    <td><%= auction.user_id %></td>
+    <td><%= auction.name %></td>
+    <td><%= auction.title %></td>
+    <td><%= auction.description %></td>
+    <td><%= auction.reserved_price %></td>
+    <td><%= link_to 'Show', auction %></td>
+    <% if current_user.role == false %>
+    <td><%= link_to 'Edit', edit_auction_path(auction) %></td>
+    <td><%= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' } %></td> <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Auction', new_auction_path %></div>

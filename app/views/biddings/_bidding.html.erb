@@ -1,0 +1,19 @@
+<h2>Bids by Bidders :</h2>
+<% @auction.biddings.each do |bid| %>
+  <p>
+    <b>Bidder:</b>
+    <%= current_user.fname %>
+  </p>
+
+  <p>
+    <b>Bid Price:</b>
+    <%= bid.bid_price %>
+  </p>
+  <p>
+  <% if current_user.role = false %>  
+  <%= link_to 'Destroy Bid', [bid.auction, bid],
+               :confirm => 'Are you sure?',
+               :method => :delete %>
+</p> <% end %>
+  <p>==============================================</p>
+<% end %>

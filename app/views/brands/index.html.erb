@@ -1,0 +1,33 @@
+<div style="padding-bottom: 700px;"><center><h1>Brand's Listing</h1></center>
+
+<table border="2" bgcolor="#BBDAFF" width="100%">
+  <tr>
+    <th>Brand name</th>
+    <th>Description</th>
+    <th>Category</th>
+    <% if current_user.role != true %>
+    <th></th>
+    <th></th>
+    <th></th> <% end %>
+  </tr>
+
+<% @brands.each do |brand| %>
+  <tr>
+    <td><%= brand.brand_name %></td>
+    <td><%= brand.description %></td>
+    <% if brand.categories.nil? %>
+      <td>Category</td> 
+    <% else %>
+      <td><%= brand.category.name %></td> 
+    <% end %> <% if current_user.role != true %>
+    <td><%= link_to 'Show', brand %></td>
+    <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
+    <td><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %></td> <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if current_user.role != true %>
+<%= link_to 'New Brand', new_brand_path %>
+<% end %></div>

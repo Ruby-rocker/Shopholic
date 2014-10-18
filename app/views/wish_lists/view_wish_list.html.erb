@@ -1,0 +1,38 @@
+<style type="text/css"> .wishlist{text-align: center;} .abc{text-align: right;}
+.qnty{text-align: center;}
+
+</style><div style="padding-bottom:1000px;padding-left: 10px">
+  <%= form_for :wish_list,as: :post, url: update_wish_list_path do |f| %>
+  <h1> Wish List</h1>
+  <table border="3" > 
+  <tr>
+  <td colspan="6" class="wishlist"><big><b>User: </b><%= current_user.email %></td>  </big> 
+  </tr>
+  <tr>
+    <th>Product_Id </th>
+    <th>Product Name</th>
+    <th>Unit Price</th>
+    <th>Quantity</th>
+    <th>Sub Total</th>
+    <th></th>
+  </tr>
+  <% sum = 0 %>
+<% @wish_lists.each do |wishlist| %>
+   <% if wishlist.user_id == current_user.id %>
+  <tr> 
+    <% @product = view_product(wishlist.product_id) %>
+    <td class="wishlist"><%= @product.id %></td>
+    <td class="wishlist"><%= @product.name %></td>
+    <td class="wishlist"><%= @product.price %></td>
+    <td class="wishlist"><%= text_field_tag "quantity[#{wishlist.id}]", wishlist.quantity, :class => "qnty" %></td>
+    <td class="wishlist"><%= @product.price*wishlist.quantity %>
+      <% sum +=@product.price*wishlist.quantity %>
+    </td> 
+    <td><%=f.button "destroy"%></td>
+  </tr>
+  <% end %><% end %>
+  
+ 
+</table>
+<%= f.submit %>
+<% end %></div>

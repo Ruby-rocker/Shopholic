@@ -1,0 +1,120 @@
+<div style="padding-bottom: 1000px;padding-left: 5px;"><p>
+  <b>User Name:</b>
+  <%= @auction.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @auction.title %>
+</p>
+
+<p>
+  <b>Product_Image:</b><br>
+  <%= image_tag @auction.avatar , :class=>"auc_img"%>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @auction.description %>
+</p>
+
+<p>
+  <b>Reserved price:</b>
+  <%= @auction.reserved_price %>
+</p>
+
+<p>
+  <b>Auction Available Till:</b>
+  <%= @auction.auction_ended %>
+</p>
+<p>
+  <b>Auction Rating:</b>
+ <%= form_for(Rating.new) do |f| %>
+  
+   <%= radio_button_tag "rating[value]", 1 %>
+    <%= f.label :one %>
+   <%= radio_button_tag "rating[value]", 2 %>
+   <%= f.label :two %>
+   <%= radio_button_tag "rating[value]", 3 %>
+   <%= f.label :three %>
+   <%= radio_button_tag "rating[value]", 4 %>
+   <%= f.label :four %>
+   <%= radio_button_tag "rating[value]", 5 %>
+   <%= f.label :five %>
+ <% end %>
+</p>
+<div style="background-color:orange">
+  <center> Your Bid must be <big><b>2% higher</big></b> then Reserved Price / previous Bid Amount
+  </center>
+</div>
+
+<% if @auction.user_id == current_user.id %>
+ <%= link_to 'Edit', edit_auction_path(@auction) %> |
+ <%= link_to 'Back', auctions_path %>
+<% end %> <br>
+
+<% if @auction.auction_ended.to_time > Time.now %>
+  <% if @auction.biddings == [] %>
+    <%= render "biddings/form" %>
+  <% else %>
+     <h2>Last Bid for this Product :</h2>
+     <% @auction.biddings.each do |bid| %>
+     <% @lastbid = bid %> 
+  <% end %>
+
+  <p>
+    <b>Bidder:</b>
+      <%= @lastbid.bidder %>
+  </p>
+   
+  <p>
+    <b>Bid Price:</b>
+      <%= @lastbid.bid_price %>
+  </p>
+      
+  <p>
+    <% if current_user.role = false %> 
+      <%= link_to 'Destroy Bid', [@lastbid.auction, @lastbid],
+                 :confirm => 'Are you sure?',
+                 :method => :delete %></p>
+    <% end %>
+
+  <p>==============================================</p>
+  <%= render "biddings/form" %>
+<% end %>
+<% else %>
+<h2>Last Bid for this Product :</h2>
+<% @auction.biddings.each do |bid| %>
+<% @lastbid = bid %> 
+<% end %>
+  <p><b>Bidder:</b>
+  <%= @lastbid.bidder %></p>
+  
+  <p><b>Bid Price:</b>
+  <%= @lastbid.bid_price %></p>
+  
+<center><h1>Auction Ended</h1></center><center>
+<% if @auction.user_id == current_user.id %>
+<fieldset style="width:300px;border:2"><legend><big><b>Auction Details</b></big></legend>
+<% @auction.biddings.each do |bid| %>
+   <p>Bidder: <%= bid.bidder %></p>
+   <p>Bid Price: <%= bid.bid_price %></p>
+   <p>email: <%= find_user(bid.user_id).email %> </p>
+   ==================================================
+<% end %>
+</fieldset></center>
+<% end %><% end %></div>
+
+  <%#= form_for(rating_ballot, :html => { :class => 'rating_ballot' }) do |f| %>
+    <%#= f.label("value_1", content_tag(:span, '1'), {:class=>"rating", :id=>"1"}) %>
+    <%#= radio_button_tag("rating[value]", 1, current_user_rating == 1, :class => 'rating_button') %>
+    <%#= f.label("value_2", content_tag(:span, '2'), {:class=>"rating", :id=>"2"}) %>
+    <%#= radio_button_tag("rating[value]", 2, current_user_rating == 2, :class => 'rating_button') %>
+    <%#= f.label("value_3", content_tag(:span, '3'), {:class=>"rating", :id=>"3"}) %>
+    <%#= radio_button_tag("rating[value]", 3, current_user_rating == 3, :class => 'rating_button') %>
+    <%#= f.label("value_4", content_tag(:span, '4'), {:class=>"rating", :id=>"4"}) %>
+    <%#= radio_button_tag("rating[value]", 4, current_user_rating == 4, :class => 'rating_button') %>
+    <%#= f.label("value_5", content_tag(:span, '5'), {:class=>"rating", :id=>"5"}) %>
+    <%#= radio_button_tag("rating[value]", 5, current_user_rating == 5, :class => 'rating_button') %>
+    <%#= hidden_field_tag("auction_id", @auction.id) %>
+    <%#= f.submit :Submit %>
+  

@@ -1,0 +1,39 @@
+<div style="padding-bottom:1100px">
+	<div class="left_pnl_menu">Categories</div><br>
+<%= form_for :product,  :html => {:id => 'products_form',:multipart => true,url: products_list_path } do |f| %>
+<% @categories = view_category %>
+<% @categories.each do |cat| %>
+<%= check_box_tag "name[]", cat.id, (params[:name] && (params[:name].include? cat.id.to_s)) ,:onclick => "refreshpage($('#products_form'));" %>
+<%= cat.name %><br>
+
+<% end %><br>
+
+<div class="left_pnl_menu">Brands</div><br>
+<% @brands = view_brand %>
+<% @brands.each do |b| %>
+<%= check_box_tag "brand[]", b.id, (params[:brand] && (params[:brand].include? b.id.to_s)) ,:onclick => "refreshpage($('#products_form'));" %>
+<%= b.brand_name %><br>
+<% end %><br>
+
+
+<div class="left_pnl_menu">Price Range</div><br>
+<% @cost = cost_product %>
+<% @cost.each do |c| %>
+<%= check_box_tag "price[]", c, (params[:price] && (params[:price].include? c.to_s)) ,:onclick => "refreshpage($('#products_form'));" %>
+<%= c %><br>
+<% end %>
+<% end %></div>
+<style type="text/css">
+.left_pnl_menu{border: 1px; 
+				size: 20px; 
+				font-size: 18px;
+				text-align:center;
+				background: -moz-linear-gradient(bottom left, purple, orange);
+				padding:2px;
+				border:1px solid blue;
+				color:black; 
+				font-weight: bold;
+				font-family: "Goudy Bookletter 1911";
+
+			}
+</style>

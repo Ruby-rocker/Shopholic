@@ -1,0 +1,17 @@
+<h2>Bid this Product:</h2>
+<%= form_for([@auction, @auction.biddings.build]) do |f| %>
+
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <div class="field">
+    <%= f.label :Bidder %><br />
+    <%= f.text_field :bidder, :value => current_user.fname %>
+  </div>
+  <div class="field">
+    <%= f.label :bid_price %><br />
+    <%= f.text_field :bid_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

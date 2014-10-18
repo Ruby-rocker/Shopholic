@@ -1,0 +1,37 @@
+<div style="padding-bottom: 800px;padding-left: 10px;">
+<style type="text/css">
+.proimage {-webkit-box-shadow: 3px 3px 3px #7C7C7C; box-shadow: 5px 5px 5px #660000;
+            height: 200px;width: 200px; }</style>
+<p>
+ <%= image_tag @product.avatar.url(:medium), :class=>"proimage" %>
+ 
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @product.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @product.price %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @product.category.name %>
+</p>
+
+<p>
+  <b>Brand:</b>
+  <%= @product.brand.brand_name %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+</div>

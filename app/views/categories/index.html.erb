@@ -1,0 +1,25 @@
+<div style="padding-bottom: 950px;"><center><h1>Category's Listing</h1></center>
+
+<table border="2" bgcolor="#BBDAFF" width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <% if current_user.role != true %>
+    <th></th>
+    <th></th>
+    <th></th> <% end %>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%= category.name %></td>
+    <td><%= category.description %></td><% if current_user.role != true %>
+    <td><%= link_to 'Show', category %></td>
+    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br /><% if current_user.role != true %>
+<%= link_to 'New Category', new_category_path %><% end %> </div>

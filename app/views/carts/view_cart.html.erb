@@ -1,0 +1,47 @@
+<style type="text/css"> .vc{text-align: center;} .abc{text-align: right;}
+.qnty{text-align: center;} img{padding-top: 10px}</style>
+<div style="padding-bottom: 1000px;padding-left: 10px;">
+  <%= form_for :cart,as: :post, url: update_cart_path do |f| %>
+  <h1 style="padding-left: 200px;"> Shopping Cart</h1>
+  <table border="3" class="vc"> 
+  <tr>
+  <td colspan="6" > <b>User: </b><%= current_user.email %></td>  
+  </tr>
+  <tr>
+    <th>Product_Id </th>
+    <th>Product Name</th>
+    <th>Unit Price</th>
+    <th>Quantity</th>
+    <th>SubTotal</th>
+    <th></th>
+    
+  </tr>
+  <% sum = 0 %>
+<% @carts.each do |cart| %>
+   <% if cart.User_id == current_user.id %>
+  <tr> 
+    <% @product = view_product(cart.Product_id) %>
+    <td> <%= @product.id %></td>
+    <td> <%= @product.name %></td>
+    <td> <%= @product.price %></td>
+    <td> <%= text_field_tag "Quantity[#{cart.id}]", cart.Quantity, :class => "qnty" %></td>
+    <td> <%= @product.price*cart.Quantity %>
+      <% sum +=@product.price*cart.Quantity %>
+    </td> 
+    <td><%= f.submit 'destroy' %></td>
+  </tr>
+  <% end %><% end %>
+  
+  <tr><big><b>
+    <td colspan="4" class="abc"> <big><b>Total Amount to Pay :</b> </big></td>
+    <td colspan="2"> <big><b><%= sum %> </b> </big></td>
+  
+  </tr>
+
+</table>
+<%= f.submit 'Update Cart'%>  |
+<%= link_to "Order Place", confirm_order_path %><br>
+<%=link_to image_tag('back.png', :size => "50x50") , '/'  %>
+<%#= link_to "Checkout", @master_cart.paypal_url(products_url, @carts) %>
+<%#= link_to image_tag('chk.jpeg'),@carts.paypal_url(products_url), :class => "ch" %>
+<% end %></div>

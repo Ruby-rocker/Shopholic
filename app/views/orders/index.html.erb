@@ -1,0 +1,24 @@
+<div style="padding-bottom: 1500px"><p id="notice"><%= notice %></p>
+<center><h1>Master Order</h1></center>
+
+<table border="2" bgcolor="#BBDAFF" width="80%">
+  <tr>
+    <th>Master Order Id</th>
+    <th>User Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Total Amount</th>
+    <th></th>
+  </tr>
+
+<% @master.each do |mord| %>
+  <tr>
+    <td align="center"><%= mord.id %></td>
+    <td align="center"><%= mord.user_id %></td>
+    <td align="center"><%= find_user(mord.user_id).fname %></td>
+    <td align="center"><%= find_user(mord.user_id).lname %></td>
+    <td align="center"><%= mord.total_amt %></td>
+    <td align="center"><%= link_to 'Show', order_path(mord.id) %></td>
+<% end %></tr>
+
+</table></div>

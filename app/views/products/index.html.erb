@@ -1,0 +1,36 @@
+<div style="padding-bottom: 800px"><center>
+<h1>List of Products</h1></center>
+ 
+<table border="2" bgcolor="#BBDAFF" width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Brand</th>
+    <% if current_user.role != true %>
+    <th></th>
+    <th></th>
+    <th></th><% end %>
+  </tr>
+
+<% @products.each do |product| %>
+  <tr>
+    <td><%= product.name %></td>
+    <td><%= product.description %></td>
+    <td><%= product.price %></td>
+    
+    <td><%= product.category.name %></td>
+    <td><%= product.brand.brand_name %></td>
+    <% if current_user.role != true %>
+    <td><%= link_to 'Show', product %></td>
+    <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td> <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if current_user.role != true %>
+<%= link_to 'New Product', new_product_path %> <% end %>
+</div>

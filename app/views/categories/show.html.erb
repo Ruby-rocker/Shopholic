@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @category.description %>
+</p>
+<style type="text/css"> .proimage {box-shadow: 5px 5px 5px #660000;height: 100px;width: 100px; }
+td{ white-space:pre-wrap } </style>
+<p>
+<b> Products : </b> <br>
+<table border="2" bgcolor="aqua">
+	<tr>
+	<th>Product Name</th>
+	<th>Description</th>
+	<th>Image</th>
+	<th>Price(INR)</th>
+	<th>Add to Cart</th>
+	</tr>
+	<% @category.products.each do |product| %>
+	<tr>
+	<td class="t" align="center" ><%= product.name %></td>
+	<td class="t" align="center" ><%= product.description %></td>
+	<td class="t" align="center"><%= image_tag product.avatar.url(:medium), :class=>"proimage" %> </td>
+	<td class="t" align="center"><%= product.price %></td>
+	<td><%= link_to 'Add to Cart', add_to_cart_path(product.id) %></br></td>
+	</tr><% end %>
+</table></p>
+
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

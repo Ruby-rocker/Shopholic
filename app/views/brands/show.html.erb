@@ -1,0 +1,22 @@
+<div style="padding-bottom: 800px;">
+<p>
+  <b>Brand name:</b>
+  <%= @brand.brand_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @brand.description %>
+</p>
+
+<p>
+  	<b>Category Type:</b>
+  	<% if @brand.categories.nil? %>
+ 		"category"
+    <% else %>
+       <%= @brand.category.name %>
+    <% end %>
+ </p>
+
+<%= link_to 'Edit', edit_brand_path(@brand) %> |
+<%= link_to 'Back', brands_path %> </div>

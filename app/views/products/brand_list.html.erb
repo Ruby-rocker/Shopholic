@@ -1,0 +1,1 @@
+$("#brand_list").html('<%= escape_javascript( <%= f.grouped_collection_select :brand_id, Category.order(:name), :brands, :name, :id, :brand_name, :prompt => "-- Select Brand --" %>)%>')

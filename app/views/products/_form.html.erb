@@ -1,0 +1,45 @@
+<%= form_for @product,  :html => {:id => 'newpro_form', :multipart => true } do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    <%= f.label :available_quantity %><br />
+    <%= f.text_field :available_quantity %>
+  </div>
+  <div class="field">
+  <%= f.collection_select :category_id, Category.order(:name), :id, :name, {:prompt => "--  Select Category Type --", :remote => true}, {:onchange => "refresh()"} %>
+
+    </div>
+  
+  <div class="field" id="brand_list">  <%= f.grouped_collection_select :brand_id, Category.order(:name), :brands, :name, :id, :brand_name, :prompt => "-- Select Brand --" %>
+    
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

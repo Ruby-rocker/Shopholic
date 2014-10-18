@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  brand_name: MyString
+  description: MyText
+
+two:
+  brand_name: MyString
+  description: MyText

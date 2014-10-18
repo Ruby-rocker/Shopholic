@@ -1,0 +1,35 @@
+<div style="padding-bottom: 1500px"><center><h1>Order Details</h1></center>
+
+<table border="2" bgcolor="#BBDAFF" width="100%">
+  <tr>
+    <th>Order_id</th>
+    <th>User_id</th>
+    <th>Product_id</th>
+    <th>Price</th>
+    <th>Qunatity</th>
+    <th>Total Amount</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Zipcode</th>
+    <th>State</th>
+  </tr>
+
+<% @orders.each do |order| %>
+  <tr>
+    <td align="center"><%= order.id %></td>
+    <td align="center"><%= order.user_id %></td>
+    <td align="center"><%= order.product_id %></td>
+    <td align="center"><%= order.price %></td>
+    <td align="center"><%= order.quantity %></td>
+    <td align="center"><%= order.total_amount %></td>
+    <td align="center"><%= order.baddress %></td>
+    <td align="center"><%= order.city %></td>
+    <td align="center"><%= order.zipcode %></td>
+    <td align="center"><%= order.state %></td>
+    
+
+  </tr>
+<% end %>
+</table>
+<br>
+<%= link_to image_tag('back.png', :size => "50x50"), orders_path %></div>

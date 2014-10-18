@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopaholic</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application", "easyzoom" %>
+  <%= csrf_meta_tags %>
+</head>
+<style type = "text/css">
+.xyz{background-color:#C9EAF3;}
+.box a{font-family:Verdana;
+    font-size: 15px;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    border: #B1B1B1 solid; 
+    border-width: 0px 1px 0px 0px;
+    padding: 7px 17px 7px 12px;
+    display:inline-block;}
+.menu_pdng{padding-left:5px ;}
+.box a:hover{background-color:grey}
+.banner{
+    -webkit-box-shadow: 3px 3px 3px #7C7C7C;
+    box-shadow: 5px 5px 5px #660000;}
+.left_layout{width: 20%; height: 100%;} 
+.right_layout{width: 80%; height: 100%; }
+.top_layout{background-image:url('/assets/background7.png');}
+.welcome{color:#9A03FE;padding-left: 15px;text-shadow: -1px 0 orange, 0 1px black, 1px 0 black, 0 -1px black;} 
+.cart a{padding-left: 300px;}
+</style>
+<body class="xyz">
+<table border="1" class="tbl" width="100%" height="100%">
+<tr><td colspan="2" class="top_layout">
+<p class="navbar-text pull-right" align="right">
+<% if user_signed_in? %>
+  Logged in as <strong><big><%= current_user.email %></big></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+<% else %>
+  Welcome <b>Guest</b>...!!<big><strong>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'%></strong></big>
+<% end %>
+
+
+<h1 class="welcome" style="font-family: 'Bree Serif', serif;">Welcome to Shopaholic...!!</h1> 
+<%= image_tag "shopaholic.jpeg" , size: "400x200", :class => "banner" %>
+<b>
+ 
+<h3 class="box"> <div class="menu_pdng"><%= link_to 'Home', '/'%>
+<% if current_user != nil %> 
+<%= link_to "Category List", categories_path %>
+<%= link_to "Brand List", brands_path %>
+<%= link_to "Product List", products_path %>
+<%= link_to "Auction", auctions_path %> 
+<% if current_user.role != true %>
+<%= link_to "Orders", orders_path %>
+<%= link_to 'Add New Product', new_product_path %><% end %>  
+
+<%= link_to (image_tag "cart.png", :size=>'20x20'), view_cart_path(1)%></div></h3></b><% end %>
+</td></tr>
+<tr>
+<td class="left_layout" ><%= render :partial => "/products/left_pannel" %></td>
+<td class="right_layout">
+  <% notice %>
+  <p class="alert alert-notice"><h4 style="color:green;background-color:inherit;text-align:right;width:250px;"><%= notice %></h4>
+  <% if alert %>
+  <p class="alert alert-error"><h4 style="color:green;background-color:inherit;text-align:right;width:220px;"><%= alert %></p></h4>
+ <% end %>
+  <%= yield %></td>
+</tr>
+</table>
+</body>
+</html>

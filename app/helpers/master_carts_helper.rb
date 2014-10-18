@@ -1,0 +1,2 @@
+module MasterCartsHelper
+end
