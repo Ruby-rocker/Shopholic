@@ -79,6 +79,7 @@ GEM
     paypal-sdk-rest (0.6.0)
       paypal-sdk-core (~> 0.2.4)
       uuidtools (~> 2.1)
+    pg (0.17.1)
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -143,6 +144,7 @@ DEPENDENCIES
   mysql2
   paperclip (~> 4.1)
   paypal-sdk-rest
+  pg
   rails (= 3.2.12)
   rolify
   sass-rails (~> 3.2.3)
